@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { Container } from "inversify";
 import { IDemoService } from "./domain/Contracts/IDemoService";
 import DemoService from "./domain/Services/DemoService";

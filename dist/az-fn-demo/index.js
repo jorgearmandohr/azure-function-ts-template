@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
 const startup_1 = require("../src/startup");
 const appStartup = new startup_1.default();
 const api = appStartup.container.get(Symbol.for('IResourceApi'));
@@ -26,4 +25,3 @@ const run = function (context, req) {
     });
 };
 module.exports = run.bind(this);
-//# sourceMappingURL=index.js.map

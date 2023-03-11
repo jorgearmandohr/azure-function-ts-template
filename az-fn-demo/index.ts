@@ -1,5 +1,3 @@
-import "reflect-metadata";
-
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 
 import startup from "../src/startup";
