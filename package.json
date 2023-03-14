@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "template project",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tsc",
     "watch": "tsc -w",
     "prestart": "npm run build",
     "start": "func start",
+    "debug": "func start",
     "test": "jest"
   },
   "devDependencies": {
@@ -18,6 +19,7 @@
     "typescript": "^4.0.0"
   },
   "dependencies": {
+    "class-validator": "^0.14.0",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13"
   }

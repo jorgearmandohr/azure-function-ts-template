@@ -6,7 +6,7 @@ import DemoService from "./domain/Services/DemoService";
 import ResourceApi from "./Infrasctructure/Api/ResourceApi";
 import IResourceApi from "./Infrasctructure/Api/IResourceApi";
 
-export default class startup {
+export default class Startup {
     private _container: Container;
 
     constructor() {
