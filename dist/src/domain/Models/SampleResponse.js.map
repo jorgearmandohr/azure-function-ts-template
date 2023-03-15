@@ -1,1 +1,0 @@
-{"version":3,"file":"SampleResponse.js","sourceRoot":"","sources":["../../../../src/domain/Models/SampleResponse.ts"],"names":[],"mappings":";;AAEA,MAAqB,cAAc;IAC/B,YAAY,UAAkB,EAAE,OAAe;QAO/C,SAAI,GAAG,GAAG,EAAE;YACR,OAAO,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC;QAChC,CAAC,CAAA;QARG,IAAI,CAAC,UAAU,GAAG,UAAU,CAAC;QAC7B,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IAC3B,CAAC;CAOJ;AAXD,iCAWC"}
