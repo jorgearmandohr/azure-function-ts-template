@@ -19,6 +19,7 @@ export default class ResourceApi implements IResourceApi {
 
     get = async (req:SampleResource): Promise<SampleResponse> => {
         this._logger.info("ok, esto funciona");
+        this._logger.warn("Este es un ejemplo de warn");
         const validationErros = await req.validate();
         if(validationErros.length > 0)
         {

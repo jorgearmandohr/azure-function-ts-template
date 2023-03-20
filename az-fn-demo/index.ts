@@ -1,19 +1,17 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 
-import startup from "../src/startup";
 import IResourceApi from "../src/Infrasctructure/Api/IResourceApi";
 import SampleResource from "../src/domain/Models/SampleResourceModel";
 import ILogService from "../src/domain/Contracts/ILogService";
-
-const appStartup: startup = new startup();
-const api: IResourceApi = appStartup.container.get<IResourceApi>(Symbol.for('IResourceApi'));
-const logger: ILogService = appStartup.container.get<ILogService>(Symbol.for('ILogService'));
+import Startup from "../src/startup";
 
 const run: AzureFunction = async function (context: Context, req: HttpRequest): Promise<any> {
-    context.log(`Running function demo ${context.invocationId}  with request data: `, context.req.rawBody);
+    const appStartup = new Startup(context);
+    const logger: ILogService = appStartup.getInstance<ILogService>('ILogService');
+    const api: IResourceApi = appStartup.getInstance<IResourceApi>('IResourceApi');
 
-   //logger.info.bind(context.log); //context.log.bind(logger.info);
-    //logger.info('prueba ok');
+    logger.info(`Running function demo %s for path %s with request data: %s `, context.invocationId, context.req.url, context.req.rawBody);
+
     const requestModel = new SampleResource().bindRequest(req);
     let response = await api.get(requestModel);
 
