@@ -4,6 +4,7 @@ import SampleResponse from "../../domain/Models/SampleResponse";
 import IResourceApi from "./IResourceApi";
 import SampleResource from "../../domain/Models/SampleResourceModel";
 import ILogService from "../../domain/Contracts/ILogService";
+import ProblemResponseDto from "../../domain/Models/ProblemResponseDto";
 
 @injectable()
 export default class ResourceApi implements IResourceApi {
@@ -17,19 +18,16 @@ export default class ResourceApi implements IResourceApi {
         this._logger = logger;
      }
 
-    get = async (req:SampleResource): Promise<SampleResponse> => {
+    get = async (req:SampleResource): Promise<any> => {
         this._logger.info("ok, esto funciona");
         this._logger.warn("Este es un ejemplo de warn");
         const validationErros = await req.validate();
         if(validationErros.length > 0)
         {
-            return new SampleResponse(400, validationErros.join(','));
+            return new ProblemResponseDto(400, validationErros.join(','));
         }
 
         const responseMessage = await this._demoService.greet();
-        //  req.name
-        //     ? "Hello, " + req.name + ". This HTTP triggered function executed successfully."
-        //     : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
 
         return new SampleResponse(200, responseMessage);
     }

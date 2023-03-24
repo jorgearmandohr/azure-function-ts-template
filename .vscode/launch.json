@@ -26,14 +26,23 @@
         ],
         "type": "node"
       },
-        {
-          "type": "node",
-          "request": "attach",
-          "name": "Launch Program",
-          "preLaunchTask": "npm: start",
-          "sourceMaps": true,
-          "smartStep": true,
-          "outFiles": ["${workspaceFolder}/dist/**/*.js"]
-        }
+      {
+        "type": "node",
+        "request": "attach",
+        "name": "Launch Program",
+        "preLaunchTask": "npm: start",
+        "sourceMaps": true,
+        "smartStep": true,
+        "outFiles": [
+          "${workspaceFolder}/dist/**/*.js"
+        ]
+      },
+      {
+        "name": "Attach to Node Functions",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "preLaunchTask": "func: host start"
+      }
     ]
 }

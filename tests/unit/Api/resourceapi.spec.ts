@@ -1,12 +1,16 @@
-import { HttpRequest } from "@azure/functions";
+import { Context, HttpRequest, Logger } from "@azure/functions";
 import IResourceApi from "../../../src/Infrasctructure/Api/IResourceApi";
 import startup from "../../../src/startup";
 import SampleResource from "../../../src/domain/Models/SampleResourceModel";
+import Startup from "../../../src/startup";
 
 describe('first', () => {
     let api: IResourceApi;
-    beforeEach(() => {
-        const appStartup: startup = new startup();
+    let appStartup: startup;
+
+
+    beforeAll(() => {
+        appStartup = new Startup();
         api = appStartup.container.get<IResourceApi>(Symbol.for('IResourceApi'));
     });
 
@@ -27,5 +31,5 @@ describe('first', () => {
         api.get(requestModel).then(data => {
             expect(data.statusCode).toBe(200);
         });
-    })
+    });
 })

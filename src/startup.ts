@@ -9,9 +9,10 @@ import IHttpServiceClient from "./domain/Contracts/IHttpServiceClient";
 import HttpServiceClient from "./Infrasctructure/ServiceClients/httpServiceClient/HttpServiceClient";
 import { Context, Logger } from "@azure/functions";
 import ILogService from "./domain/Contracts/ILogService";
+import LogService from "./Infrasctructure/ServiceClients/LogManager/LogService";
 
 export default class Startup {
-    private _container: Container;
+    private readonly _container: Container;
 
     constructor(context: Context = null) {
         this._container = new Container();
@@ -41,19 +42,21 @@ export default class Startup {
      * Binds logger from context
      * @param logger instancia de logger
      */
-    private registerContextDependencies(context: Context) {
+    private registerContextDependencies(context: Context): void {
         if(context){
             this._container.bind<ILogService>(Symbol.for("ILogService")).toConstantValue(context.log);
+        }else{
+            this._container.bind<ILogService>(Symbol.for("ILogService")).to(LogService).inRequestScope();
         }
     }
 
-    private registerServices() {
+    private registerServices(): void {
         this._container.bind<IDemoService>(Symbol.for("IDemoService")).to(DemoService).inRequestScope();
         this._container.bind<IHttpServiceClient>(Symbol.for("IHttpServiceClient"))
             .toConstantValue(new HttpServiceClient());
     }
 
-    private registerApis() {
+    private registerApis(): void {
         this._container.bind<IResourceApi>(Symbol.for("IResourceApi")).to(ResourceApi).inRequestScope();
     }
 }

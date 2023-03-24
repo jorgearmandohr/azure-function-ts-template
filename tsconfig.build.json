@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "include": [
     "src",
-    "az-fn-demo"
+    "az-fn-demo",
+    "az-fn-demo-second"
   ],
   "exclude": [
     "node_modules",
