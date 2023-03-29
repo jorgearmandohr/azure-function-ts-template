@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
 
 export interface IDemoService{
-    greet() : Promise<string>;
+    greet(param: string) : Promise<string>;
 }

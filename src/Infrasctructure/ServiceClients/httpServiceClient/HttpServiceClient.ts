@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosHeaders, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import IHttpServiceClient from "../../../domain/Contracts/IHttpServiceClient";
 import { injectable } from "inversify";
+import { contentTypeEnum } from "../../../components/httpUtils/ContentType";
 
 @injectable()
 export default class HttpServiceClient implements IHttpServiceClient {
@@ -38,13 +39,13 @@ export default class HttpServiceClient implements IHttpServiceClient {
     }
 
     private handleError(response: any): any {
-        console.log(response);
+        return response.data;
     }
 
     private init(): AxiosInstance {
         const service = axios.create({ withCredentials: true });
-        service.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
-        service.defaults.headers.common['Accept'] = 'application/json';
+        service.defaults.headers.common['Content-Type'] = contentTypeEnum.json;
+        service.defaults.headers.common['Accept'] = contentTypeEnum.json;
 
         service.interceptors.response.use(
             (response) => response,

@@ -1,7 +1,7 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 
 import IResourceApi from "../src/Infrasctructure/Api/IResourceApi";
-import SampleResource from "../src/domain/Models/SampleResourceModel";
+import SampleResource from "../src/domain/Models/SampleResource";
 import ILogService from "../src/domain/Contracts/ILogService";
 import Startup from "../src/startup";
 import ProblemResponseDto from "../src/domain/Models/ProblemResponseDto";

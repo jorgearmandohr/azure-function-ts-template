@@ -9,8 +9,8 @@ export default class DemoService implements IDemoService {
         this._httpService = httpService;
     }
 
-    greet = async (): Promise<string> => {
-        let result = this._httpService.get('https://api.publicapis.org/entries', true);
+    greet = async (param: string): Promise<string> => {
+        let result = this._httpService.get(`https://93daa357-5472-46cd-abf5-f674fd2c0686.mock.pstmn.io/orders/sales?name=${param}`, true);
         return result;
     }
 }
