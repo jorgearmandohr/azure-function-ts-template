@@ -1,4 +1,3 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { contentTypeEnum } from "./ContentType";
 
 export default class BaseResponse {

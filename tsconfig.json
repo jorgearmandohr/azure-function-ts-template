@@ -13,7 +13,7 @@
   },
   "include": [
     "src",
-    "az-fn-demo",
+    "_fn-demo",
     "az-fn-demo-second"
   ],
   "exclude": [

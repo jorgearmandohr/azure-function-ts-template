@@ -10,16 +10,16 @@ import { HttpStatusCode } from "../src/components/httpUtils/HttpStatusCode";
 import BaseResponse from "../src/components/httpUtils/BaseResponse";
 import SampleResponse from "../src/domain/Models/SampleResponse";
 
-const run: AzureFunction = async function (context: Context, req: HttpRequest): Promise<any> {
-    const appStartup = new Startup(context);
+const run: AzureFunction = async function (context: Context, req: HttpRequest, appStartup: Startup = new Startup()): Promise<any> {
+    appStartup.registerContextDependencies(context);
     const logger: ILogService = appStartup.getInstance<ILogService>('ILogService');
     const api: IResourceApi = appStartup.getInstance<IResourceApi>('IResourceApi');
 
     logger.info(
         `Running function demo %s for path %s with request data: %s `,
         context.invocationId,
-        context.req.url,
-        context.req.rawBody);
+        context.req?.url,
+        context.req?.rawBody);
 
     let baseResponse: BaseResponse;
 
@@ -35,7 +35,7 @@ const run: AzureFunction = async function (context: Context, req: HttpRequest): 
         const problemResponse = new ProblemResponseDto(
             HttpStatusCode.InternalServerError,
             'An internal error has ocurred. See details for reference.',
-            [error]);
+            [error.message]);
         baseResponse = new BaseResponse(
             HttpStatusCode.InternalServerError,
             problemResponse.json(),
@@ -50,4 +50,4 @@ const run: AzureFunction = async function (context: Context, req: HttpRequest): 
         context.res.status);
 };
 
-module.exports = run.bind(this);
+export default run;

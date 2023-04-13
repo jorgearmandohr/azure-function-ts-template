@@ -34,7 +34,7 @@ export default class Startup {
      * @param typeName Type Symbol
      * @returns instance
      */
-    public getInstance<T>(typeName: string): T{
+    public getInstance<T>(typeName: string): T {
         return this._container.get<T>(Symbol.for(typeName));
     }
 
@@ -42,12 +42,25 @@ export default class Startup {
      * Binds logger from context
      * @param logger instancia de logger
      */
-    private registerContextDependencies(context: Context): void {
-        if(context){
+    public registerContextDependencies(context?: Context): void {
+        if (context?.log) {
             this._container.bind<ILogService>(Symbol.for("ILogService")).toConstantValue(context.log);
-        }else{
+        } else {
             this._container.bind<ILogService>(Symbol.for("ILogService")).to(LogService).inRequestScope();
         }
+    }
+
+    /**
+     * Register IoC dependency. Removes any register asociated with the name and binds it to constant value.   
+     * @param name 
+     * @param implementation 
+     */
+    public rebind<T>(name: string, implementation: any) {
+        if (this._container.isBound(Symbol.for(name))) {
+            this._container.unbind(Symbol.for(name));
+        }
+
+        this._container.bind<T>(Symbol.for(name)).toConstantValue(implementation);
     }
 
     private registerServices(): void {
